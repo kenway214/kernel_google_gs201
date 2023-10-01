@@ -2,18 +2,19 @@
 ## osm0sis @ xda-developers
 
 ### AnyKernel setup
-# global properties
+# begin properties
 properties() { '
-kernel.string=Kernel Raviole Android 14 QPR1 {Monolithic}
+kernel.string=SultanStarlite Kernel for the Pixel 7/Pro and 7a
 do.devicecheck=1
 do.modules=0
 do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
-device.name1=raviole
-device.name2=oriole
-device.name3=raven
-supported.versions=14
+device.name1=cheetah
+device.name2=panther
+device.name3=lynx
+supported.versions=13
+supported.patchlevels=2023-06 -
 '; } # end properties
 
 # boot image installation
@@ -24,7 +25,7 @@ split_boot;
 flash_boot;
 
 # vendor_kernel_boot installation (for dtb)
-block=vendor_boot;
+block=vendor_kernel_boot;
 is_slot_device=1;
 reset_ak;
 split_boot;
