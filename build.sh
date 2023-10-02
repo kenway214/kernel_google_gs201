@@ -45,7 +45,7 @@ clear
 
 echo "==========================================================="
 echo "                                                           "
-echo "                Menu for GS-Raviole kernel                 "
+echo "                Menu for LineageNeogen kernel                 "
 echo "                                                           "
 echo "==========================================================="
 echo "                                                           "
@@ -74,12 +74,12 @@ if [ "$options" = "1" ]; then
     # Export options
     export OPTIONS=kernelsu
     # Export zip name
-    export ZIP_NAME=V2-RAVIOLE-QPR1-BETA-${OPTIONS}.zip
+    export ZIP_NAME=LineageNeogen-${OPTIONS}.zip
     curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
-    echo "CONFIG_KSU=y" >> $(pwd)/arch/arm64/configs/gs101_defconfig
-    make O=out gs101_defconfig
+    echo "CONFIG_KSU=y" >> $(pwd)/arch/arm64/configs/cloudripper_gki_defconfig
+    make O=out cloudripper_gki_defconfig
     make O=out -kj$(nproc --all) -l$(nproc --all) V=$VERBOSE 2>&1 | tee error.log
-    git restore arch/arm64/configs/gs101_defconfig
+    git restore arch/arm64/configs/cloudripper_gki_defconfig
 fi
 
 # Execute the option magisk
@@ -92,8 +92,8 @@ if [ "$options" = "2" ]; then
     # Export options
     export OPTIONS=magisk
     # Export zip name
-    export ZIP_NAME=V2-RAVIOLE-QPR1-BETA-${OPTIONS}.zip
-    make O=out gs101_defconfig
+    export ZIP_NAME=LineageNeogen-${OPTIONS}.zip
+    make O=out cloudripper_gki_defconfig
     make O=out -kj$(nproc --all) -l$(nproc --all) V=$VERBOSE 2>&1 | tee error.log
 fi
 
