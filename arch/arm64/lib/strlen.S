@@ -12,6 +12,7 @@
 
 #include <linux/linkage.h>
 #include <asm/assembler.h>
+#include <asm/mte-def.h>
 
 /*
  * calculate the length of a string
@@ -43,6 +44,17 @@ pos		.req	x12
 #define REP8_01 0x0101010101010101
 #define REP8_7f 0x7f7f7f7f7f7f7f7f
 #define REP8_80 0x8080808080808080
+
+/*
+ * When KASAN_HW_TAGS is in use, memory is checked at MTE_GRANULE_SIZE
+ * (16-byte) granularity, and we must ensure that no access straddles this
+ * alignment boundary.
+ */
+#ifdef CONFIG_KASAN_HW_TAGS
+#define MIN_PAGE_SIZE MTE_GRANULE_SIZE
+#else
+#define MIN_PAGE_SIZE 4096
+#endif
 
 SYM_FUNC_START_WEAK_PI(strlen)
 	mov	zeroones, #REP8_01
